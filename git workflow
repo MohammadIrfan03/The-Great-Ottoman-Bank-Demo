@@ -1,0 +1,16 @@
+# .github/workflows/deploy.yml
+name: Deploy Ottoman Bank
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build Docker Image
+        run: docker build -t ottoman-bank .
+      - name: Run Container
+        run: docker run -d -p 3000:3000 ottoman-bank
