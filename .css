@@ -1,0 +1,48 @@
+/* style.css */
+body {
+  font-family: 'Georgia', serif;
+  background-color: #0b1c2c;
+  color: #f5f5f5;
+  text-align: center;
+}
+
+header {
+  background-color: #1f2e45;
+  padding: 20px;
+}
+
+.logo {
+  width: 60px;
+  vertical-align: middle;
+}
+
+.auth {
+  display: flex;
+  justify-content: space-around;
+  margin: 40px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input, button {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+button {
+  background-color: #d4af37;
+  color: #000;
+  font-weight: bold;
+}
+
+.account {
+  margin: 40px;
+  background-color: #1f2e45;
+  padding: 20px;
+  border-radius: 10px;
+}
