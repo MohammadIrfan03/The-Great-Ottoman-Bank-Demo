@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+    environment:
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: ottoman123
+      DB_NAME: ottoman_bank
+
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ottoman123
+      MYSQL_DATABASE: ottoman_bank
+    ports:
+      - "3306:3306"   # <-- Expose MySQL port
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
