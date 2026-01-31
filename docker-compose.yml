@@ -1,3 +1,4 @@
+
 version: '3.8'
 
 services:
@@ -20,7 +21,7 @@ services:
       MYSQL_ROOT_PASSWORD: ottoman123
       MYSQL_DATABASE: ottoman_bank
     ports:
-      - "3306:3306"   # <-- Expose MySQL port
+      - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
 
