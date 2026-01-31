@@ -1,11 +1,11 @@
-// server.js
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql2');
+const path = require('path');
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname))); // serve everything in repo root
 
 const db = mysql.createConnection({
   host: 'mysql',
