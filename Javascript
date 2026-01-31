@@ -1,0 +1,20 @@
+// server.js
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('public'));
+
+app.post('/login', (req, res) => {
+  // Dummy login logic
+  res.send('Logged in as ' + req.body.username);
+});
+
+app.post('/register', (req, res) => {
+  // Dummy registration logic
+  res.send('Registered user: ' + req.body.username);
+});
+
+app.listen(3000, () => {
+  console.log('Server running on http://localhost:3000');
+});
