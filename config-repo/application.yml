@@ -1,0 +1,17 @@
+# Shared configuration inherited by ALL services unless overridden
+# by a service-specific file (e.g. auth-service.yml)
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,refresh,metrics
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  level:
+    com.ottomanbank: DEBUG
