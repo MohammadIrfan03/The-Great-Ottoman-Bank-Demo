@@ -1,34 +1,45 @@
-# 📜 Config Server — The Firman Divani
-
-> "One decree, applied uniformly across every province."
+# 🔐 Auth Service — Divan-ı Hüviyet (Bureau of Identity)
 
 Part of **The Great Ottoman Bank** microservices ecosystem.
 
 ## Purpose
-Centralized, Git-backed configuration for all bank microservices.
-Configuration lives in `/config-repo` at the root of this monorepo,
-versioned like any other code.
+Handles customer/admin registration, login, and JWT issuance.
+Every downstream service trusts tokens minted here.
 
 ## Run locally
 
-Prerequisite: `eureka-server` should already be running on port 8761.
+Prerequisites: `eureka-server` (8761) and `config-server` (8888) should
+already be running. MySQL running with `auth_db` created (see root README
+for DB setup).
 
 \`\`\`bash
 mvn clean install
 mvn spring-boot:run
 \`\`\`
 
-## Verify
+## API Endpoints
 
-1. Check it registered with Eureka: http://localhost:8761
-2. Fetch shared config directly:
-   \`\`\`bash
-   curl http://localhost:8888/application/default
-   \`\`\`
-   Should return the contents of `config-repo/application.yml` as JSON.
+| Method | Endpoint             | Description              | Auth required |
+|--------|----------------------|---------------------------|----------------|
+| POST   | /api/auth/register   | Register new customer     | No             |
+| POST   | /api/auth/login      | Login, receive JWT token  | No             |
+
+### Register example
+\`\`\`bash
+curl -X POST http://localhost:8081/api/auth/register \\
+  -H "Content-Type: application/json" \\
+  -d '{"fullName":"Suleyman Kanuni","email":"suleyman@ottomanbank.com","password":"Passw0rd123"}'
+\`\`\`
+
+### Login example
+\`\`\`bash
+curl -X POST http://localhost:8081/api/auth/login \\
+  -H "Content-Type: application/json" \\
+  -d '{"email":"suleyman@ottomanbank.com","password":"Passw0rd123"}'
+\`\`\`
 
 ## Tech
-- Java 17
-- Spring Boot 3.3.4
-- Spring Cloud Config Server 2023.0.3
-- Git-backed config store (this monorepo, `/config-repo` subfolder)
+- Java 17, Spring Boot 3.3.4
+- Spring Security + JWT (jjwt 0.12.6)
+- Spring Data JPA + MySQL 8
+- Eureka Client, Config Client
